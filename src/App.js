@@ -4,6 +4,7 @@ import Topbar from "./components/Topbar";
 import { Route, Routes } from "react-router-dom";
 import Dashboard from "./pages/Dashboard";
 import Sidebar from "./components/Sidebar";
+
 function App() {
   const [theme, colorMode] = useMode();
   return (
