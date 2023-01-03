@@ -40,7 +40,6 @@ const Sidebar = () => {
 
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-  const [isCollapsed, setIsCollapsed] = useState(false);
   const [selected, setSelected] = useState("dashboard");
   console.log(colors)
   return (
@@ -63,57 +62,50 @@ const Sidebar = () => {
         }
       }}
     >
-      <ProSidebar collapsed={isCollapsed}>
+      <ProSidebar collapsed={false}>
         <Menu iconShape="square">
           {/* LOGO AND MENU ICON */}
           <MenuItem
-            onClick={() => setIsCollapsed(!isCollapsed)}
-            icon={isCollapsed ? <MenuOutlinedIcon /> : undefined}
             style={{
-              margin: "10px 0 20px 0",
+              width:"300px",
+              margin: "10px 0 15px 0",
               color: colors.grey[100],
             }}
           >
-            {!isCollapsed && (
-              <Box
-                display="flex"
-                justifyContent="space-between"
-                alignItems="center"
-                ml="15px"
+          <Box
+            display="flex"
+            justifyContent="space-between"
+            alignItems="center"
+            ml="15px"
+          >
+            <Typography variant="h3" color={colors.grey[100]}>
+              ADMINIS
+            </Typography>
+          </Box>
+          <Box>
+            <Box display="flex" justifyContent="center" alignItems="center">
+              <img
+                alt ="logo"
+                width="100px"
+                height="100px"
+                src={`../../assets/signal.png`}
+                style={{ cursor: "pointer", borderRadius:"50%"}}
+              />
+            </Box>
+            <Box textAlign="center">
+              <Typography variant="h5"
+                color={colors.grey[100]}
+                fontWeight="bold"
+                sx={{
+                  m: "0px 0 0 0"
+                }}
               >
-                <Typography variant="h3" color={colors.grey[100]}>
-                  ADMINIS
-                </Typography>
-                <IconButton onClick={() => setIsCollapsed(!isCollapsed)}>
-                  <MenuOutlinedIcon />
-                </IconButton>
-              </Box>
-            )}
-            {!isCollapsed && (
-              <Box>
-                <Box display="flex" justifyContent="center" alignItems="center">
-                  <img
-                    alt ="logo"
-                    width="100px"
-                    height="100px"
-                    src={`../../assets/signal.png`}
-                    style={{ cursor: "pointer", borderRadius:"50%"}}
-                  />
-                </Box>
-                <Box textAlign="center">
-                  <Typography variant="h5"
-                    color={colors.grey[100]}
-                    fontWeight="bold"
-                    sx={{
-                      m: "10px 0 0 0"
-                    }}
-                  >
-                    Admin Dashboard
-                  </Typography>
-                </Box>
-              </Box>
-            )}
-            <Box paddingLeft={isCollapsed ? undefined : "10%"}>
+                Admin Dashboard
+              </Typography>
+            </Box>
+          </Box>
+
+            <Box paddingLeft={"10%"}>
             <Item
               title="Dashboard"
               to="/"
