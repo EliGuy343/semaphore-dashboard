@@ -9,11 +9,11 @@ import { useEffect, useState } from "react";
 const Users = () => {
   const [users, setUsers] = useState([]);
   useEffect(() => {
-    let searchQuery = query(
+    let usersQuery = query(
       collection(db, 'users')
     )
 
-    getDocs(searchQuery).then(result => {
+    getDocs(usersQuery).then(result => {
       setUsers(result.docs);
     });
   }, []);
@@ -32,6 +32,11 @@ const Users = () => {
       field: "email",
       headerName: "Email",
       flex: 1,
+    },
+    {
+      field: "location",
+      headerName: "Location",
+      flex: 1
     }
   ]
   return (
@@ -66,15 +71,15 @@ const Users = () => {
           },
         }}
       >
-        <DataGrid checkboxSelection
+        <DataGrid
           rows={
             users.map((user)=> ({
               id:user.id,
               email: user.data().email,
-              name: user.data().name
+              name: user.data().name,
+              location: user.data().location
             }))}
           columns={columns}
-        
         />
       </Box>
     </Box>
