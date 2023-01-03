@@ -1,14 +1,22 @@
-import { Box, Typography, useTheme } from "@mui/material";
+import { Box, useTheme } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import { tokens } from "../theme";
-import { mockDataTeam } from "../data/mockdata";
-import AdminPanelSettingsOutlinedIcon from "@mui/icons-material/AdminPanelSettingsOutlined";
-import LockOpenOutlinedIcon from "@mui/icons-material/LockOpenOutlined";
-import SecurityOutlinedIcon from "@mui/icons-material/SecurityOutlined";
 import Header from "../components/Header";
+import { db } from "../firebase";
+import { collection, getDocs, query } from "firebase/firestore";
+import { useEffect, useState } from "react";
 
 const Users = () => {
+  const [users, setUsers] = useState([]);
+  useEffect(() => {
+    let searchQuery = query(
+      collection(db, 'users')
+    )
 
+    getDocs(searchQuery).then(result => {
+      setUsers(result.docs);
+    });
+  }, []);
 
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
@@ -28,7 +36,7 @@ const Users = () => {
   ]
   return (
     <Box m="20px">
-      <Header title="TEAM" subtitle="Managing the Team Members" />
+      <Header title="Users" subtitle="Managing Users" />
       <Box
         m="40px 0 0 0"
         height="75vh"
@@ -58,7 +66,16 @@ const Users = () => {
           },
         }}
       >
-        <DataGrid checkboxSelection rows={mockDataTeam} columns={columns} />
+        <DataGrid checkboxSelection
+          rows={
+            users.map((user)=> ({
+              id:user.id,
+              email: user.data().email,
+              name: user.data().name
+            }))}
+          columns={columns}
+        
+        />
       </Box>
     </Box>
   )
