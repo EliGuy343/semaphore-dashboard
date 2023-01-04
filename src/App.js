@@ -7,6 +7,8 @@ import Sidebar from "./components/Sidebar";
 import Team from "./pages/Team";
 import Users from "./pages/Users";
 import Form from "./pages/Form";
+import Bar from "./pages/Bar";
+
 
 function App() {
   const [theme, colorMode] = useMode();
@@ -24,6 +26,7 @@ function App() {
               <Route path="/team" element={<Team/>}/>
               <Route path="/users" element={<Users/>}/>
               <Route path="/add/team" element={<Form/>}/>
+              <Route path="/bar" element={<Bar/>}/>
             </Routes>
           </main>
         </div>
