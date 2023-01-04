@@ -8,6 +8,7 @@ import Team from "./pages/Team";
 import Users from "./pages/Users";
 import Form from "./pages/Form";
 import Bar from "./pages/Bar";
+import Pie from "./pages/Pie";
 
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
               <Route path="/users" element={<Users/>}/>
               <Route path="/add/team" element={<Form/>}/>
               <Route path="/bar" element={<Bar/>}/>
+              <Route path="/pie" element={<Pie/>}/>
             </Routes>
           </main>
         </div>
