@@ -4,10 +4,11 @@ import { tokens } from "../theme";
 import { mockBarData as data } from "../data/mockdata";
 
 
-const BarChart = ({isDashboard}) => {
+const BarChart = ({isDashboard, stats, keys}) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-
+  console.log(data)
+  console.log(stats)
   return (
     <ResponsiveBar
       data={data}
@@ -39,7 +40,7 @@ const BarChart = ({isDashboard}) => {
           },
         },
       }}
-      keys={["hot dog", "burger", "sandwich", "kebab", "fries", "donut"]}
+      keys={["hot dog"]}
       indexBy="country"
       margin={{ top: 50, right: 130, bottom: 50, left: 60 }}
       padding={0.3}
