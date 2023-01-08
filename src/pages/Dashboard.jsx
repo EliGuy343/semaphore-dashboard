@@ -21,7 +21,6 @@ const Dashboard = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [totalUsers, setTotalUsers] = useState(0);
-  const [mostActiveUser, setMostActiveUser] = useState(null);
   const [totalPosts, setTotalPosts] = useState(0);
   const [loading, setLoading] = useState(false);
   const [refresh, setRefresh] = useState(true);
@@ -33,7 +32,6 @@ const Dashboard = () => {
         (res) => {
           const totalData = res.data;
           setTotalUsers(totalData['total_users'])
-          setMostActiveUser(totalData['max_posts'])
           setTotalPosts(totalData['Total_posts'])
           console.log(totalData)
           setRefresh(false);
@@ -74,10 +72,10 @@ const Dashboard = () => {
         gridAutoRows="140px"
         gap="20px"
       >
-        {!loading && totalUsers && totalPosts && mostActiveUser &&
+        {!loading && totalUsers && totalPosts &&
           <>
             <Box
-              gridColumn="span 4"
+              gridColumn="span 6"
               backgroundColor={colors.primary[400]}
               display="flex"
               alignItems="center"
@@ -100,7 +98,7 @@ const Dashboard = () => {
                 }
               />
             </Box>
-            <Box
+            {/* <Box
               gridColumn="span 4"
               backgroundColor={colors.primary[400]}
               display="flex"
@@ -133,9 +131,9 @@ const Dashboard = () => {
                   />
                 }
               />
-            </Box>
+            </Box> */}
             <Box
-              gridColumn="span 4"
+              gridColumn="span 6"
               backgroundColor={colors.primary[400]}
               display="flex"
               alignItems="center"
