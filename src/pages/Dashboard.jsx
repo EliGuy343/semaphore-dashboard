@@ -13,10 +13,25 @@ import LineChart from "../components/LineChart";
 import BarChart from "../components/BarChart";
 import StatBox from "../components/StatBox";
 import ProgressCircle from "../components/ProgressCircle";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 const Dashboard = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+  const [totalUsers, setTotalUsers] = useState(0);
+  const [mostActiveUser, setMostActiveUser] = useState(null);
+  const [totalPosts, setTotalPosts] = useState(0);
+  const [Loading, setLoading] = useState(false);
+  const [refresh, setRefresh] = useState(true);
+
+  useEffect(() => {
+    axios.get('http://semaphore-analysis.herokuapp.com/total').then(
+      (res) => {
+        console.log(res);
+      }
+    ).catch((err) => console.log(err))
+  }, [])
 
   return (
     <Box m="20px">
