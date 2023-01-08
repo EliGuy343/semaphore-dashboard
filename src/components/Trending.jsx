@@ -52,7 +52,7 @@ const Trending = (gridColumn, gridRow, isDashboard) => {
         Top 5 trending words
       </Typography>
       <Box height="250px" mt="-20px">
-        <BarChart isDashboard={true} stats={trending} keys={keys}/>
+        <BarChart stats={trending} keys={keys}/>
       </Box>
   </Box>
   )

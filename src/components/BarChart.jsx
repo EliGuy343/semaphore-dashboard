@@ -54,7 +54,7 @@ const BarChart = ({isDashboard, stats, keys}) => {
         tickSize: 5,
         tickPadding: 5,
         tickRotation: 0,
-        legend: isDashboard ? undefined : "trending", // changed
+        legend: isDashboard ? undefined : "trending words", // changed
         legendPosition: "middle",
         legendOffset: 32,
       }}
@@ -62,7 +62,7 @@ const BarChart = ({isDashboard, stats, keys}) => {
         tickSize: 5,
         tickPadding: 5,
         tickRotation: 0,
-        legend: isDashboard ? undefined : "trending", // changed
+        legend: isDashboard ? undefined : "Amount", // changed
         legendPosition: "middle",
         legendOffset: -40,
       }}
