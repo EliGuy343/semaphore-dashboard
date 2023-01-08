@@ -22,21 +22,25 @@ const Dashboard = () => {
   const [totalUsers, setTotalUsers] = useState(0);
   const [mostActiveUser, setMostActiveUser] = useState(null);
   const [totalPosts, setTotalPosts] = useState(0);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [refresh, setRefresh] = useState(true);
 
   useEffect(() => {
-    axios.get('http://semaphore-analysis.herokuapp.com/total').then(
-      (res) => {
-        const totalData = res.data;
-        setTotalUsers(totalData['total_users'])
-        setMostActiveUser(totalData['max_posts'])
-        setTotalPosts(totalData['total_users'])
-        setLoading(false);
-        setRefresh(false);
-      }
-    ).catch((err) => console.log(err))
-  }, [])
+    if(refresh) {
+      setLoading(true);
+      axios.get('http://semaphore-analysis.herokuapp.com/total').then(
+        (res) => {
+          const totalData = res.data;
+          setTotalUsers(totalData['total_users'])
+          setMostActiveUser(totalData['max_posts'])
+          setTotalPosts(totalData['Total_posts'])
+          console.log(totalData)
+          setRefresh(false);
+          setLoading(false);
+        }
+      ).catch((err) => console.log(err))
+    }
+  }, [refresh])
 
   return (
     <Box m="20px">
@@ -55,6 +59,7 @@ const Dashboard = () => {
               fontWeight: "bold",
               padding: "10px 20px",
             }}
+            onClick={() => setRefresh(true)}
           >
             <DownloadOutlinedIcon sx={{ mr:"10px"}} />
             Refersh Data
@@ -68,7 +73,7 @@ const Dashboard = () => {
         gridAutoRows="140px"
         gap="20px"
         >
-      {!loading &&
+      {!loading && totalUsers && totalPosts && mostActiveUser &&
         <>
           <Box
             gridColumn="span 4"
@@ -112,8 +117,8 @@ const Dashboard = () => {
               Most Active User
             </Typography>
             <StatBox
-              subtitle={mostActiveUser.user}
-              title={'Posts: ' + mostActiveUser.max_posts}
+              subtitle={mostActiveUser?.user}
+              title={'Posts: ' + mostActiveUser?.max_posts}
               progress="0.50"
               increase="+21%"
               icon={

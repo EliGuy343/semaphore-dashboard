@@ -12,7 +12,7 @@ const StatBox = ({ title, subtitle, icon, progress, increase}) => {
         <Box display='flex' flexDirection='column' justifyContent='center' alignItems='center' ml={1}>
           {icon}
           <Typography
-            variant="h4"
+            variant="h5"
             fontWeight="bold"
             sx={{
               color: colors.grey[100]
