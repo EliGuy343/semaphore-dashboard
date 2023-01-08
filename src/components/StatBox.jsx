@@ -9,7 +9,7 @@ const StatBox = ({ title, subtitle, icon, progress, increase}) => {
   return (
     <Box>
       <Box display="flex" justifyContent="center" alignItems='start'>
-        <Box>
+        <Box display='flex' flexDirection='column' justifyContent='center' alignItems='center' ml={1}>
           {icon}
           <Typography
             variant="h4"

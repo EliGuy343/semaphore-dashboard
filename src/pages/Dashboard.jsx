@@ -3,12 +3,12 @@ import { Box, Button, IconButton, Typography, useTheme } from "@mui/material";
 import { tokens } from "../theme";
 import { mockTransactions } from "../data/mockdata";
 import DownloadOutlinedIcon from "@mui/icons-material/DownloadOutlined";
-import EmailIcon from "@mui/icons-material/Email";
+import MessageRoundedIcon from '@mui/icons-material/MessageRounded';
 import PointOfSaleIcon from "@mui/icons-material/PointOfSale";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
-import TrafficIcon from "@mui/icons-material/Traffic";
 import Header from "../components/Header";
 import LineChart from "../components/LineChart";
+import PersonRoundedIcon from '@mui/icons-material/PersonRounded';
 
 import BarChart from "../components/BarChart";
 import StatBox from "../components/StatBox";
@@ -22,13 +22,18 @@ const Dashboard = () => {
   const [totalUsers, setTotalUsers] = useState(0);
   const [mostActiveUser, setMostActiveUser] = useState(null);
   const [totalPosts, setTotalPosts] = useState(0);
-  const [Loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [refresh, setRefresh] = useState(true);
 
   useEffect(() => {
     axios.get('http://semaphore-analysis.herokuapp.com/total').then(
       (res) => {
-        console.log(res);
+        const totalData = res.data;
+        setTotalUsers(totalData['total_users'])
+        setMostActiveUser(totalData['max_posts'])
+        setTotalPosts(totalData['total_users'])
+        setLoading(false);
+        setRefresh(false);
       }
     ).catch((err) => console.log(err))
   }, [])
@@ -62,67 +67,93 @@ const Dashboard = () => {
         gridTemplateColumns="repeat(12, 1fr)"
         gridAutoRows="140px"
         gap="20px"
-      >
-        <Box
-          gridColumn="span 4"
-          backgroundColor={colors.primary[400]}
-          display="flex"
-          alignItems="center"
-          justifyContent="center"
         >
-          <StatBox
-            title="12,361"
-            subtitle="Emails Sent"
-            progress="0.75"
-            increase="+14%"
-            icon={
-              <EmailIcon
+      {!loading &&
+        <>
+          <Box
+            gridColumn="span 4"
+            backgroundColor={colors.primary[400]}
+            display="flex"
+            alignItems="center"
+            justifyContent="center"
+          >
+            <StatBox
+              title={totalPosts}
+              subtitle="Total Posts"
+              progress="0.75"
+              increase="+14%"
+              icon={
+                <MessageRoundedIcon
+                  sx={{
+                    color: colors.greenAccent[600],
+                    fontSize: "26px",
+                    mr:'10px',
+                    ml:'10px'
+                  }}
+                />
+              }
+            />
+          </Box>
+          <Box
+            gridColumn="span 4"
+            backgroundColor={colors.primary[400]}
+            display="flex"
+            flexDirection='column'
+            alignItems="center"
+            justifyContent="center"
+          >
+            <Typography
+              sx={{
+                fontSize:'14px',
+                fontWeight:'bold',
+                mb:'4px'
+              }}
+            >
+              Most Active User
+            </Typography>
+            <StatBox
+              subtitle={mostActiveUser.user}
+              title={'Posts: ' + mostActiveUser.max_posts}
+              progress="0.50"
+              increase="+21%"
+              icon={
+                <PersonRoundedIcon
+                  sx={{
+                    color: colors.greenAccent[600],
+                    fontSize: "26px",
+                    mr:'10px',
+                    ml:'10px'
+                  }}
+                />
+              }
+            />
+          </Box>
+          <Box
+            gridColumn="span 4"
+            backgroundColor={colors.primary[400]}
+            display="flex"
+            alignItems="center"
+            justifyContent="center"
+          >
+            <StatBox
+              title={totalUsers}
+              subtitle="New Clients"
+              progress="0.30"
+              increase="+5%"
+              icon={
+                <PersonAddIcon
                 sx={{
                   color: colors.greenAccent[600],
-                  fontSize: "26px"
+                  fontSize: "26px",
+                  mr:'10px',
+                  ml:'10px'
                 }}
-              />
-            }
-          />
-        </Box>
-        <Box
-          gridColumn="span 4"
-          backgroundColor={colors.primary[400]}
-          display="flex"
-          alignItems="center"
-          justifyContent="center"
-        >
-          <StatBox
-            title="431,225"
-            subtitle="Sales Obtained"
-            progress="0.50"
-            increase="+21%"
-            icon={
-              <PointOfSaleIcon
-                sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
-              />
-            }
-          />
-        </Box>
-        <Box
-          gridColumn="span 4"
-          backgroundColor={colors.primary[400]}
-          display="flex"
-          alignItems="center"
-          justifyContent="center"
-        >
-          <StatBox
-            title="32,441"
-            subtitle="New Clients"
-            progress="0.30"
-            increase="+5%"
-            icon={
-              <PersonAddIcon
-                sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
-              />
-            }
-          />
-        </Box>
+                />
+              }
+            />
+          </Box>
+        </>
+      }
         <Box
           gridColumn="span 8"
           gridRow="span 2"
