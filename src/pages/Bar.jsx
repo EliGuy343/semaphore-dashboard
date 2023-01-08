@@ -7,7 +7,7 @@ import Trending from '../components/Trending'
 const Bar = () => {
   return (
     <Box m="20px">
-      <Header title="Bar Chart" subtitle="Simple Bar Chart" />
+      <Header title="Current Top 5 Trending words" subtitle="In Posts" />
       <Trending/>
     </Box>
   )

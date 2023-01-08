@@ -1,17 +1,14 @@
 import { useTheme } from "@mui/material";
 import { ResponsiveBar } from "@nivo/bar";
 import { tokens } from "../theme";
-import { mockBarData as data } from "../data/mockdata";
 
 
 const BarChart = ({isDashboard, stats, keys}) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-  console.log(data)
-  console.log(stats)
   return (
     <ResponsiveBar
-      data={data}
+      data={stats}
       theme={{
         axis: {
           domain: {
@@ -40,13 +37,13 @@ const BarChart = ({isDashboard, stats, keys}) => {
           },
         },
       }}
-      keys={["hot dog"]}
-      indexBy="country"
+      keys={keys}
+      indexBy="trending"
       margin={{ top: 50, right: 130, bottom: 50, left: 60 }}
-      padding={0.3}
+      padding={0.5}
       valueScale={{ type: "linear" }}
       indexScale={{ type: "band", round: true }}
-      colors={{ scheme: "nivo" }}
+      colors={{ scheme: "accent" }}
       borderColor={{
         from: "color",
         modifiers: [["darker", "1.6"]],
@@ -57,7 +54,7 @@ const BarChart = ({isDashboard, stats, keys}) => {
         tickSize: 5,
         tickPadding: 5,
         tickRotation: 0,
-        legend: isDashboard ? undefined : "country", // changed
+        legend: isDashboard ? undefined : "trending", // changed
         legendPosition: "middle",
         legendOffset: 32,
       }}
@@ -65,11 +62,11 @@ const BarChart = ({isDashboard, stats, keys}) => {
         tickSize: 5,
         tickPadding: 5,
         tickRotation: 0,
-        legend: isDashboard ? undefined : "food", // changed
+        legend: isDashboard ? undefined : "trending", // changed
         legendPosition: "middle",
         legendOffset: -40,
       }}
-      enableLabel={false}
+      enableLabel={true}
       labelSkipWidth={12}
       labelSkipHeight={12}
       labelTextColor={{
@@ -102,7 +99,7 @@ const BarChart = ({isDashboard, stats, keys}) => {
       ]}
       role="application"
       barAriaLabel={function (e) {
-        return e.id + ": " + e.formattedValue + " in country: " + e.indexValue;
+        return e.id + ": " + e.formattedValue + " trending: " + e.indexValue;
       }}
     >
     </ResponsiveBar>

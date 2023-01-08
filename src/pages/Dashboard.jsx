@@ -73,95 +73,95 @@ const Dashboard = () => {
         gridTemplateColumns="repeat(12, 1fr)"
         gridAutoRows="140px"
         gap="20px"
-        >
-      {!loading && totalUsers && totalPosts && mostActiveUser &&
-        <>
-          <Box
-            gridColumn="span 4"
-            backgroundColor={colors.primary[400]}
-            display="flex"
-            alignItems="center"
-            justifyContent="center"
-          >
-            <StatBox
-              title={totalPosts}
-              subtitle="Total Posts"
-              progress="0.75"
-              increase="+14%"
-              icon={
-                <MessageRoundedIcon
-                  sx={{
-                    color: colors.greenAccent[600],
-                    fontSize: "26px",
-                    mr:'10px',
-                    ml:'10px'
-                  }}
-                />
-              }
-            />
-          </Box>
-          <Box
-            gridColumn="span 4"
-            backgroundColor={colors.primary[400]}
-            display="flex"
-            flexDirection='column'
-            alignItems="center"
-            justifyContent="center"
-          >
-            <Typography
-              sx={{
-                fontSize:'14px',
-                fontWeight:'bold',
-                mb:'4px'
-              }}
+      >
+        {!loading && totalUsers && totalPosts && mostActiveUser &&
+          <>
+            <Box
+              gridColumn="span 4"
+              backgroundColor={colors.primary[400]}
+              display="flex"
+              alignItems="center"
+              justifyContent="center"
             >
-              Most Active User
-            </Typography>
-            <StatBox
-              subtitle={mostActiveUser?.user}
-              title={'Posts: ' + mostActiveUser?.max_posts}
-              progress="0.50"
-              increase="+21%"
-              icon={
-                <PersonRoundedIcon
+              <StatBox
+                title={totalPosts}
+                subtitle="Total Posts"
+                progress="0.75"
+                increase="+14%"
+                icon={
+                  <MessageRoundedIcon
+                    sx={{
+                      color: colors.greenAccent[600],
+                      fontSize: "26px",
+                      mr:'10px',
+                      ml:'10px'
+                    }}
+                  />
+                }
+              />
+            </Box>
+            <Box
+              gridColumn="span 4"
+              backgroundColor={colors.primary[400]}
+              display="flex"
+              flexDirection='column'
+              alignItems="center"
+              justifyContent="center"
+            >
+              <Typography
+                sx={{
+                  fontSize:'14px',
+                  fontWeight:'bold',
+                  mb:'4px'
+                }}
+              >
+                Most Active User
+              </Typography>
+              <StatBox
+                subtitle={mostActiveUser?.user}
+                title={'Posts: ' + mostActiveUser?.max_posts}
+                progress="0.50"
+                increase="+21%"
+                icon={
+                  <PersonRoundedIcon
+                    sx={{
+                      color: colors.greenAccent[600],
+                      fontSize: "26px",
+                      mr:'10px',
+                      ml:'10px'
+                    }}
+                  />
+                }
+              />
+            </Box>
+            <Box
+              gridColumn="span 4"
+              backgroundColor={colors.primary[400]}
+              display="flex"
+              alignItems="center"
+              justifyContent="center"
+            >
+              <StatBox
+                title={totalUsers}
+                subtitle="New Clients"
+                progress="0.30"
+                increase="+5%"
+                icon={
+                  <PersonAddIcon
                   sx={{
                     color: colors.greenAccent[600],
                     fontSize: "26px",
                     mr:'10px',
                     ml:'10px'
                   }}
-                />
-              }
-            />
-          </Box>
-          <Box
-            gridColumn="span 4"
-            backgroundColor={colors.primary[400]}
-            display="flex"
-            alignItems="center"
-            justifyContent="center"
-          >
-            <StatBox
-              title={totalUsers}
-              subtitle="New Clients"
-              progress="0.30"
-              increase="+5%"
-              icon={
-                <PersonAddIcon
-                sx={{
-                  color: colors.greenAccent[600],
-                  fontSize: "26px",
-                  mr:'10px',
-                  ml:'10px'
-                }}
-                />
-              }
-            />
-          </Box>
-        </>
-      }
+                  />
+                }
+              />
+            </Box>
+          </>
+        }
         <Box
-          gridColumn="span 8"
+          gridColumn="span 6"
           gridRow="span 2"
           backgroundColor={colors.primary[400]}
         >
@@ -181,21 +181,15 @@ const Dashboard = () => {
                 All Recent Activity
               </Typography>
             </Box>
-            <Box>
-              <IconButton>
-                <DownloadOutlinedIcon
-                  sx={{ fontSize: "26px", color: colors.greenAccent[500] }}
-                />
-              </IconButton>
-            </Box>
           </Box>
           <Box height="250px" m="-20px 0 0 0">
             <LineChart isDashboard={true} />
           </Box>
         </Box>
         <Trending
-          gridColumn="span 4"
+          gridColumn="span 6"
           gridRow="span 2"
+          isDashboard={true}
         />
       </Box>
     </Box>
