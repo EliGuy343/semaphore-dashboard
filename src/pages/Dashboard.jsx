@@ -31,9 +31,8 @@ const Dashboard = () => {
       axios.get('http://semaphore-analysis.herokuapp.com/total').then(
         (res) => {
           const totalData = res.data;
-          setTotalUsers(totalData['total_users'])
-          setTotalPosts(totalData['Total_posts'])
-          console.log(totalData)
+          setTotalUsers(totalData['totalUsers'])
+          setTotalPosts(totalData['TotalPosts'])
           setRefresh(false);
           setLoading(false);
         }
@@ -98,40 +97,6 @@ const Dashboard = () => {
                 }
               />
             </Box>
-            {/* <Box
-              gridColumn="span 4"
-              backgroundColor={colors.primary[400]}
-              display="flex"
-              flexDirection='column'
-              alignItems="center"
-              justifyContent="center"
-            >
-              <Typography
-                sx={{
-                  fontSize:'14px',
-                  fontWeight:'bold',
-                  mb:'4px'
-                }}
-              >
-                Most Active User
-              </Typography>
-              <StatBox
-                subtitle={mostActiveUser?.user}
-                title={'Posts: ' + mostActiveUser?.max_posts}
-                progress="0.50"
-                increase="+21%"
-                icon={
-                  <PersonRoundedIcon
-                    sx={{
-                      color: colors.greenAccent[600],
-                      fontSize: "26px",
-                      mr:'10px',
-                      ml:'10px'
-                    }}
-                  />
-                }
-              />
-            </Box> */}
             <Box
               gridColumn="span 6"
               backgroundColor={colors.primary[400]}
