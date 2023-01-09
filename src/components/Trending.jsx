@@ -1,11 +1,11 @@
-import { useTheme } from "@emotion/react";
+import { useTheme } from "@mui/material";
 import { Box, Typography } from "@mui/material";
 import axios, { AxiosHeaders } from "axios";
 import { useEffect, useState } from "react"
 import { tokens } from "../theme";
 import BarChart from "./BarChart";
 
-const Trending = (gridColumn, gridRow, isDashboard) => {
+const Trending = ({gridColumn, gridRow, isDashboard}) => {
 
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
@@ -28,6 +28,7 @@ const Trending = (gridColumn, gridRow, isDashboard) => {
       }
     ).catch((err) => console.log(err))
   }, [])
+
   if(loading) {
     return (
       <Box>
@@ -54,7 +55,7 @@ const Trending = (gridColumn, gridRow, isDashboard) => {
       <Box height="250px" mt="-20px">
         <BarChart stats={trending} keys={keys}/>
       </Box>
-  </Box>
+    </Box>
   )
 }
 

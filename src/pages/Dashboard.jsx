@@ -16,6 +16,7 @@ import ProgressCircle from "../components/ProgressCircle";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Trending from "../components/Trending";
+import MostActive from "../components/MostActive";
 
 const Dashboard = () => {
   const theme = useTheme();
@@ -30,9 +31,8 @@ const Dashboard = () => {
       setLoading(true);
       axios.get('http://semaphore-analysis.herokuapp.com/total').then(
         (res) => {
-          const totalData = res.data;
-          setTotalUsers(totalData['totalUsers'])
-          setTotalPosts(totalData['TotalPosts'])
+          setTotalUsers(res.data.TotalUsers)
+          setTotalPosts(res.data.totalPosts)
           setRefresh(false);
           setLoading(false);
         }
@@ -71,7 +71,7 @@ const Dashboard = () => {
         gridAutoRows="140px"
         gap="20px"
       >
-        {!loading && totalUsers && totalPosts &&
+        {!loading &&
           <>
             <Box
               gridColumn="span 6"
@@ -123,32 +123,7 @@ const Dashboard = () => {
             </Box>
           </>
         }
-        <Box
-          gridColumn="span 6"
-          gridRow="span 2"
-          backgroundColor={colors.primary[400]}
-        >
-          <Box
-            mt="25px"
-            p="0 30px"
-            display="flex"
-            justifyContent="space-between"
-            alignItems="center"
-          >
-            <Box>
-              <Typography
-                variant="h5"
-                fontWeight="600"
-                color={colors.grey[100]}
-              >
-                All Recent Activity
-              </Typography>
-            </Box>
-          </Box>
-          <Box height="250px" m="-20px 0 0 0">
-            <LineChart isDashboard={true} />
-          </Box>
-        </Box>
+        <MostActive gridColumn="span 6" girdRow="span 2"/>
         <Trending
           gridColumn="span 6"
           gridRow="span 2"
