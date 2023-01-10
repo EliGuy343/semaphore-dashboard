@@ -1,6 +1,5 @@
 import { Box } from "@mui/material";
 import Header from "../components/Header";
-import LineChart from "../components/LineChart";
 import MostActive from "../components/MostActive";
 const Line = () => {
   return (

@@ -1,18 +1,12 @@
 
-import { Box, Button, IconButton, Typography, useTheme } from "@mui/material";
+import { Box, Button, useTheme } from "@mui/material";
 import { tokens } from "../theme";
-import { mockTransactions } from "../data/mockdata";
 import DownloadOutlinedIcon from "@mui/icons-material/DownloadOutlined";
 import MessageRoundedIcon from '@mui/icons-material/MessageRounded';
-import PointOfSaleIcon from "@mui/icons-material/PointOfSale";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import Header from "../components/Header";
-import LineChart from "../components/LineChart";
-import PersonRoundedIcon from '@mui/icons-material/PersonRounded';
 
-import BarChart from "../components/BarChart";
 import StatBox from "../components/StatBox";
-import ProgressCircle from "../components/ProgressCircle";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Trending from "../components/Trending";
