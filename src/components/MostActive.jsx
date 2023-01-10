@@ -8,13 +8,18 @@ const MostActive = ({gridColumn, gridRow, isDashboard}) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
-  const [activeUsers, setActiveUsers] = useState([])
+  const [activeUsers, setActiveUsers] = useState({})
   const [loading, setLoading] = useState(false);
 
   useEffect(() =>{
     axios.get("http://semaphore-analysis.herokuapp.com/active").then(
       (res) => {
-        console.log(res.data);
+        const activeData = Object.keys(res.data["mostActivePosters"]).map(
+          (key, index) => (
+            {name: key, posts:res.data["mostActivePosters"][key]}
+          )
+        );
+        setActiveUsers(activeData)
       }
     ).catch((err) => console.log(err))
   }, [])
@@ -37,24 +42,32 @@ const MostActive = ({gridColumn, gridRow, isDashboard}) => {
       height='215%'
     >
       <Box
-        mt="25px"
+        mt="35px"
         p="0 30px"
         display="flex"
         justifyContent="space-between"
         alignItems="center"
       >
-        <Box>
+        {isDashboard &&  <Box>
           <Typography
             variant="h5"
             fontWeight="600"
             color={colors.grey[100]}
           >
-            All Recent Activity
+            Most Active Users
           </Typography>
-        </Box>
+        </Box>}
       </Box>
-      <Box height="250px" m="-20px 0 0 0">
-        <LineChart/>
+      <Box
+        height="250px"
+        display='flex'
+        justifyContent='center'
+        alignItems='center'
+      >
+        { !isDashboard
+          ? <LineChart width={900} height={250} stats={activeUsers}/>
+          : <LineChart width={600} height={220} stats={activeUsers}/>
+        }
       </Box>
     </Box>
   )

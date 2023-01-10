@@ -1,13 +1,12 @@
 import { Box } from "@mui/material";
 import Header from "../components/Header";
 import LineChart from "../components/LineChart";
+import MostActive from "../components/MostActive";
 const Line = () => {
   return (
     <Box m="20px">
-      <Header title="Line Chart" subtitle="Simple Line Chart" />
-      <Box height="75vh">
-        <LineChart />
-      </Box>
+      <Header title="Most Active Users" subtitle="The Users who post the most" />
+      <MostActive/>
     </Box>
   );
 };

@@ -123,7 +123,7 @@ const Dashboard = () => {
             </Box>
           </>
         }
-        <MostActive gridColumn="span 6" girdRow="span 2"/>
+        <MostActive gridColumn="span 6" girdRow="span 2" isDashboard={true}/>
         <Trending
           gridColumn="span 6"
           gridRow="span 2"
