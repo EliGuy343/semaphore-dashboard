@@ -12,7 +12,7 @@ const MostActive = ({gridColumn, gridRow, isDashboard}) => {
   const [loading, setLoading] = useState(false);
 
   useEffect(() =>{
-    axios.get("http://semaphore-analysis.herokuapp.com/active").then(
+    axios.get("http://localhost:5000/active").then(
       (res) => {
         const activeData = Object.keys(res.data["mostActivePosters"]).map(
           (key, index) => (

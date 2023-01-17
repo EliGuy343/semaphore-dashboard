@@ -23,7 +23,7 @@ const Dashboard = () => {
   useEffect(() => {
     if(refresh) {
       setLoading(true);
-      axios.get('http://semaphore-analysis.herokuapp.com/total').then(
+      axios.get('http://localhost:5000/total').then(
         (res) => {
           setTotalUsers(res.data.TotalUsers)
           setTotalPosts(res.data.totalPosts)

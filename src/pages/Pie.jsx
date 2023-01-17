@@ -1,10 +1,11 @@
 import { useTheme } from "@emotion/react";
-import { Box, TextField } from "@mui/material";
+import { Box, Button, TextField } from "@mui/material";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import Header from "../components/Header";
 import PieChart from "../components/PieChart";
 import { tokens } from "../theme";
+import QueryStatsIcon from '@mui/icons-material/QueryStats';
 
 const SentimentAnalysis = () => {
 
@@ -15,7 +16,7 @@ const SentimentAnalysis = () => {
   const [searchString, setSearchString] = useState("");
 
   useEffect(() => {
-    axios.get("https://semaphore-analysis.herokuapp.com/sentiment?search=Biden").then(
+    axios.get("http://localhost:5000/sentiment?search=Biden").then(
       (res) => {
         console.log(res.data)
       }
@@ -34,8 +35,27 @@ const SentimentAnalysis = () => {
             width: "40%",
             backgroundColor:colors.primary[400]
           }}
+          onChange={(e) => {
+            setSearchString(e.target.value);
+          }}
         />
-
+        <Box mt="20px">
+          <Button
+            sx={{
+              backgroundColor: colors.blueAccent[700],
+              color: colors.grey[100],
+              fontSize:"14px",
+              fontWeight: "bold",
+              padding: "10px 20px",
+            }}
+            onClick={() => {
+              setSearchQuery(searchString);
+            }}
+          >
+            <QueryStatsIcon/>
+            query
+          </Button>
+        </Box>
       </Box>
       <Box height="75vh">
         <PieChart />

@@ -15,7 +15,7 @@ const Trending = ({gridColumn, gridRow, isDashboard}) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() =>{
-    axios.get("http://semaphore-analysis.herokuapp.com/trending/top5").then(
+    axios.get("http://localhost:5000/trending/top5").then(
       (res) => {
         setTrending(res.data.map((arr) => ({
           "trending": arr[0],
