@@ -11,43 +11,44 @@ const SentimentAnalysis = () => {
 
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-
   const [searchQuery, setSearchQuery] = useState("");
   const [searchString, setSearchString] = useState("");
   const [sentiment, setSentiment] = useState(null);
 
   useEffect(() => {
-    axios.get("http://localhost:5000/sentiment?search=Biden").then(
-      (res) => {
-        const sentimentArr = [
-          {
-            id:"negative",
-            label:"negative",
-            value:0,
-            color:"hsl(104, 70%, 50%)"
-          },
-          {
-            id:"positive",
-            label:"positive",
-            value:0,
-            color:"hsl(162, 70%, 50%)"
-          },
-          {
-            id:"neutral",
-            label:"neutral",
-            value:0,
-            color:"hsl(291, 70%, 50%)"
-          },
-        ]
-        for(let result of res.data) {
-          sentimentArr[0].value += result.pos
-          sentimentArr[1].value += result.neg
-          sentimentArr[2].value += result.neu
+    if(searchQuery) {
+      axios.get(`http://localhost:5000/sentiment?search=${searchQuery}`).then(
+        (res) => {
+          const sentimentArr = [
+            {
+              id:"neutral",
+              label:"neutral",
+              value:0,
+              color:"hsl(291, 70%, 50%)"
+            },
+            {
+              id:"negative",
+              label:"negative",
+              value:0,
+              color:"hsl(104, 70%, 50%)"
+            },
+            {
+              id:"positive",
+              label:"positive",
+              value:0,
+              color:"hsl(50, 70%, 30%)"
+            },
+          ]
+          for(let result of res.data) {
+            sentimentArr[0].value += result.neu
+            sentimentArr[1].value += result.neg
+            sentimentArr[2].value += result.pos
+          }
+          setSentiment(sentimentArr);
         }
-        setSentiment(sentimentArr);
-      }
-    ).catch((err) => console.log(err))
-  }, [])
+      ).catch((err) => console.log(err))
+    }
+  }, [searchQuery])
 
   return (
     <Box m="20px">
