@@ -14,11 +14,37 @@ const SentimentAnalysis = () => {
 
   const [searchQuery, setSearchQuery] = useState("");
   const [searchString, setSearchString] = useState("");
+  const [sentiment, setSentiment] = useState(null);
 
   useEffect(() => {
     axios.get("http://localhost:5000/sentiment?search=Biden").then(
       (res) => {
-        console.log(res.data)
+        const sentimentArr = [
+          {
+            id:"negative",
+            label:"negative",
+            value:0,
+            color:"hsl(104, 70%, 50%)"
+          },
+          {
+            id:"positive",
+            label:"positive",
+            value:0,
+            color:"hsl(162, 70%, 50%)"
+          },
+          {
+            id:"neutral",
+            label:"neutral",
+            value:0,
+            color:"hsl(291, 70%, 50%)"
+          },
+        ]
+        for(let result of res.data) {
+          sentimentArr[0].value += result.pos
+          sentimentArr[1].value += result.neg
+          sentimentArr[2].value += result.neu
+        }
+        setSentiment(sentimentArr);
       }
     ).catch((err) => console.log(err))
   }, [])
@@ -57,9 +83,9 @@ const SentimentAnalysis = () => {
           </Button>
         </Box>
       </Box>
-      <Box height="75vh">
-        <PieChart />
-      </Box>
+     {sentiment && <Box height="75vh">
+        <PieChart data={sentiment} />
+      </Box>}
     </Box>
   );
 };
