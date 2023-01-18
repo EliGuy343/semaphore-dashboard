@@ -55,7 +55,7 @@ const SentimentAnalysis = () => {
   return (
     <Box m="20px">
       <Box display="flex" flexDirection="column"  alignItems="center">
-        <Header title="Sentiment Analysis" subtitle="Analyize sentiment of User base" />
+        <Header title="Sentiment Analysis" subtitle="Analyize sentiment of user base about a topic" />
         <TextField
           id="outlined-basic"
           label="Query Sentiment..."
