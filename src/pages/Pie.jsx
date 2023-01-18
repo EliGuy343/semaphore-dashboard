@@ -14,9 +14,10 @@ const SentimentAnalysis = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [searchString, setSearchString] = useState("");
   const [sentiment, setSentiment] = useState(null);
+  const [refresh, setRefresh] = useState(false);
 
   useEffect(() => {
-    if(searchQuery) {
+    if(searchQuery && refresh) {
       axios.get(`http://localhost:5000/sentiment?search=${searchQuery}`).then(
         (res) => {
           const sentimentArr = [
@@ -45,10 +46,11 @@ const SentimentAnalysis = () => {
             sentimentArr[2].value += result.pos
           }
           setSentiment(sentimentArr);
+          setRefresh(false);
         }
       ).catch((err) => console.log(err))
     }
-  }, [searchQuery])
+  }, [refresh])
 
   return (
     <Box m="20px">
@@ -77,6 +79,7 @@ const SentimentAnalysis = () => {
             }}
             onClick={() => {
               setSearchQuery(searchString);
+              setRefresh(true);
             }}
           >
             <QueryStatsIcon/>
