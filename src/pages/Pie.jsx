@@ -18,7 +18,8 @@ const SentimentAnalysis = () => {
 
   useEffect(() => {
     if(searchQuery && refresh) {
-      axios.get(`http://localhost:5000/sentiment?search=${searchQuery}`).then(
+      const preparedSearchQuery = searchQuery.replace(/\s+/g, '+');
+      axios.get(`http://localhost:5000/sentiment?search=${preparedSearchQuery}`).then(
         (res) => {
           const sentimentArr = [
             {
